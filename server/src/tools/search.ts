@@ -27,9 +27,9 @@ const ALL_NAMESPACES = ["stripe", "twilio"];
 // ─── Definition ───
 
 export const definition = {
-  title: "Search documentation",
+  title: "Search API documentation",
   description:
-    "Searches indexed API documentation using semantic + keyword hybrid search. Returns ranked results with snippets. Use the 'api' parameter to filter by a specific API (e.g. 'stripe' or 'twilio'). If omitted, searches all APIs.",
+    "Search Stripe and Twilio API documentation. Use this tool whenever a user asks about API endpoints, parameters, authentication, error codes, webhooks, or how to use any Stripe or Twilio feature. Returns ranked documentation results with snippets. Use the 'api' parameter to filter by 'stripe' or 'twilio', or omit to search all APIs.",
   inputSchema: {
     query: z.string(),
     api: z.string().optional().describe("Filter to a specific API: 'stripe' or 'twilio'. Omit to search all."),

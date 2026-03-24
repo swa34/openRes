@@ -22,6 +22,8 @@ export default function App() {
   // Infer tool name from data shape when not provided (e.g. window.openai.toolOutput)
   function inferToolName(data: Record<string, unknown>): string {
     if (Array.isArray(data.results) || Array.isArray(data.items)) return "search";
+    // get_endpoint wraps data in an "endpoint" key
+    if (data.endpoint && typeof data.endpoint === "object") return "get_endpoint";
     if (data.method && data.path && data.parameters) return "get_endpoint";
     if (data.summary && typeof (data.summary as Record<string, unknown>).statusCode === "number") return "test_endpoint";
     if (data.statusCode !== undefined && data.latencyMs !== undefined) return "test_endpoint";

@@ -104,9 +104,17 @@ function emitOpenaiToolOutput(data: Record<string, unknown> | undefined) {
   toolResultHandlers.forEach((handler) => handler(result));
 }
 
-// Check initial toolOutput on load
+// Track whether we've already emitted the initial toolOutput
+let initialToolOutputEmitted = false;
+
+// Check initial toolOutput on load (deferred so handlers can register first)
 if (window.openai?.toolOutput) {
-  setTimeout(() => emitOpenaiToolOutput(window.openai?.toolOutput), 0);
+  setTimeout(() => {
+    if (!initialToolOutputEmitted) {
+      initialToolOutputEmitted = true;
+      emitOpenaiToolOutput(window.openai?.toolOutput);
+    }
+  }, 50); // slightly longer delay to let React mount
 }
 
 // Listen for subsequent updates
@@ -183,6 +191,14 @@ export async function callTool(
  */
 export function onToolResult(handler: ToolResultHandler): () => void {
   toolResultHandlers.add(handler);
+
+  // If there's a pending initial toolOutput that hasn't been emitted yet
+  // (or was emitted before any handler was registered), re-emit it now.
+  if (!initialToolOutputEmitted && window.openai?.toolOutput) {
+    initialToolOutputEmitted = true;
+    setTimeout(() => emitOpenaiToolOutput(window.openai?.toolOutput), 0);
+  }
+
   return () => {
     toolResultHandlers.delete(handler);
   };

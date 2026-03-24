@@ -46,7 +46,7 @@ export function getEndpointStore(): Map<string, ParsedEndpoint> {
 export const definition = {
   title: "Get API endpoint details",
   description:
-    "Returns the full schema, parameters, request/response shapes, code examples, and error codes for a specific API endpoint.",
+    "Look up a specific Stripe or Twilio API endpoint to see its full schema, parameters, request body, response shape, code examples, and error codes. Use this when a user asks about a specific endpoint like 'POST /v1/charges' or 'GET /v1/customers'. Set 'api' to 'stripe' or 'twilio' and 'path' to the endpoint path.",
   inputSchema: {
     api: z.string(),
     path: z.string(),
@@ -179,17 +179,13 @@ export async function handler(args: {
       },
     ],
     structuredContent: {
-      endpoint: {
-        method: resolvedMethod,
-        path: endpoint.path,
-        baseUrl,
-        summary: endpoint.summary,
-        parameters: endpoint.parameters,
-      },
+      endpoint: safeClone(fullEndpoint),
     },
     _meta: {
       found: true,
-      endpoint: safeClone(fullEndpoint),
+      api,
+      method: resolvedMethod,
+      path: endpoint.path,
     },
   };
 }
