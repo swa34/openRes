@@ -1,0 +1,25 @@
+{
+  "name": "docscope-widget",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "DocScope widget UI — renders inside ChatGPT iframe via MCP Apps bridge",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "highlight.js": "^11.11.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "esbuild": "^0.27.4",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.2"
+  }
+}

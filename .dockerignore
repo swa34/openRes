@@ -1,0 +1,10 @@
+node_modules
+server/node_modules
+widget/node_modules
+widget/dist
+server/dist
+server/eval-reports
+.git
+.claude
+*.md
+!README.md

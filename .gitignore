@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+server/dist/
+widget/dist/
+
+# Eval reports (generated, not committed)
+eval-reports/
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Docker
+.docker/
+
+# ngrok
+*.ngrok*
+
+# Claude Code settings (local)
+.claude/settings.local.json
+
+# Logs
+*.log
+
+# Resume (private)
+*.docx

@@ -1,0 +1,426 @@
+[
+  {
+    "query": "How do I create a PaymentIntent?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["PaymentIntent", "client_secret", "confirm"],
+    "golden_answer_keywords": ["POST", "amount", "currency", "client_secret"]
+  },
+  {
+    "query": "How do I list all customers?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/customers"],
+    "expected_concepts": ["customer", "list", "pagination"],
+    "golden_answer_keywords": ["GET", "limit", "starting_after", "has_more"]
+  },
+  {
+    "query": "How do I create a charge?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["charge", "amount", "currency", "source"],
+    "golden_answer_keywords": ["POST", "amount", "currency"]
+  },
+  {
+    "query": "How do I retrieve a specific subscription?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/subscriptions"],
+    "expected_concepts": ["subscription", "retrieve", "subscription ID"],
+    "golden_answer_keywords": ["GET", "sub_"]
+  },
+  {
+    "query": "How do I create a refund?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/refunds"],
+    "expected_concepts": ["refund", "charge", "amount"],
+    "golden_answer_keywords": ["POST", "charge", "amount"]
+  },
+  {
+    "query": "How do I list all invoices?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/invoices"],
+    "expected_concepts": ["invoice", "list", "customer"],
+    "golden_answer_keywords": ["GET", "customer", "status"]
+  },
+  {
+    "query": "How do I create a product?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/products"],
+    "expected_concepts": ["product", "name", "description"],
+    "golden_answer_keywords": ["POST", "name"]
+  },
+  {
+    "query": "How do I update a customer?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/customers"],
+    "expected_concepts": ["customer", "update", "metadata"],
+    "golden_answer_keywords": ["POST", "email", "metadata"]
+  },
+  {
+    "query": "How do I create a checkout session?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/checkout/sessions"],
+    "expected_concepts": ["checkout", "session", "line_items", "success_url"],
+    "golden_answer_keywords": ["POST", "line_items", "mode", "success_url"]
+  },
+  {
+    "query": "How do I attach a payment method to a customer?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_methods"],
+    "expected_concepts": ["payment method", "attach", "customer"],
+    "golden_answer_keywords": ["POST", "customer", "attach"]
+  },
+  {
+    "query": "What's the difference between Charges and PaymentIntents?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/charges", "/v1/payment_intents"],
+    "expected_concepts": ["charge", "PaymentIntent", "SCA", "migration"],
+    "golden_answer_keywords": ["PaymentIntent", "SCA", "confirm", "client_secret"]
+  },
+  {
+    "query": "How does Stripe Connect work?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/accounts", "/v1/transfers", "/v1/charges"],
+    "expected_concepts": ["Connect", "platform", "connected account", "transfer"],
+    "golden_answer_keywords": ["platform", "connected account", "Standard", "Express"]
+  },
+  {
+    "query": "What is a SetupIntent and when should I use one?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/setup_intents"],
+    "expected_concepts": ["SetupIntent", "save card", "off-session", "mandate"],
+    "golden_answer_keywords": ["SetupIntent", "payment_method", "off-session"]
+  },
+  {
+    "query": "How does Stripe billing with subscriptions work?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/subscriptions"],
+    "expected_concepts": ["subscription", "billing", "recurring", "invoice", "price"],
+    "golden_answer_keywords": ["subscription", "price", "invoice", "billing_cycle_anchor"]
+  },
+  {
+    "query": "What is Stripe Radar and how does fraud detection work?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/radar/value_lists", "/v1/radar/early_fraud_warnings", "/v1/radar/payment_evaluations"],
+    "expected_concepts": ["Radar", "fraud", "rules", "machine learning"],
+    "golden_answer_keywords": ["Radar", "fraud", "rules"]
+  },
+  {
+    "query": "How do idempotency keys work in Stripe?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["idempotency", "Idempotency-Key", "retry", "safe"],
+    "golden_answer_keywords": ["Idempotency-Key", "header", "retry"]
+  },
+  {
+    "query": "What is the difference between a Price and a Plan?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/prices"],
+    "expected_concepts": ["Price", "Plan", "billing", "recurring", "one-time"],
+    "golden_answer_keywords": ["Price", "recurring", "one_time"]
+  },
+  {
+    "query": "How does Stripe handle multi-currency payments?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_intents", "/v1/charges", "/v1/transfers"],
+    "expected_concepts": ["currency", "presentment", "settlement", "conversion"],
+    "golden_answer_keywords": ["currency", "amount"]
+  },
+  {
+    "query": "What is a PaymentMethod vs a Source vs a Token?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_methods", "/v1/sources", "/v1/tokens"],
+    "expected_concepts": ["PaymentMethod", "Source", "Token", "migration"],
+    "golden_answer_keywords": ["PaymentMethod", "recommended"]
+  },
+  {
+    "query": "How do Stripe webhooks ensure exactly-once delivery?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/webhook_endpoints"],
+    "expected_concepts": ["webhook", "idempotency", "retry", "event"],
+    "golden_answer_keywords": ["event", "retry", "idempotent"]
+  },
+  {
+    "query": "What params does POST /v1/subscriptions accept?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/subscriptions"],
+    "expected_concepts": ["customer", "items", "price", "default_payment_method"],
+    "golden_answer_keywords": ["customer", "items", "price"]
+  },
+  {
+    "query": "Is 'currency' required for creating charges?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["currency", "required", "amount"],
+    "golden_answer_keywords": ["required", "currency", "amount"]
+  },
+  {
+    "query": "What parameters are needed to create a Checkout Session?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/checkout/sessions"],
+    "expected_concepts": ["line_items", "mode", "success_url", "cancel_url"],
+    "golden_answer_keywords": ["line_items", "mode", "success_url"]
+  },
+  {
+    "query": "What are the required fields for creating a customer?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/customers"],
+    "expected_concepts": ["customer", "email", "name", "metadata"],
+    "golden_answer_keywords": ["POST", "email"]
+  },
+  {
+    "query": "What parameters does the create invoice endpoint accept?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/invoices"],
+    "expected_concepts": ["invoice", "customer", "auto_advance", "collection_method"],
+    "golden_answer_keywords": ["customer", "auto_advance"]
+  },
+  {
+    "query": "What fields are returned in a PaymentIntent response?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["id", "status", "amount", "client_secret", "payment_method"],
+    "golden_answer_keywords": ["status", "client_secret", "amount"]
+  },
+  {
+    "query": "What params does the create price endpoint take?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/prices"],
+    "expected_concepts": ["unit_amount", "currency", "recurring", "product"],
+    "golden_answer_keywords": ["unit_amount", "currency", "product"]
+  },
+  {
+    "query": "What optional parameters can I pass to list charges?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["limit", "starting_after", "created", "customer"],
+    "golden_answer_keywords": ["limit", "starting_after", "customer"]
+  },
+  {
+    "query": "What parameters does the Transfer endpoint accept?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/transfers"],
+    "expected_concepts": ["amount", "currency", "destination"],
+    "golden_answer_keywords": ["amount", "currency", "destination"]
+  },
+  {
+    "query": "What fields are in the balance transaction response?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/balance_transactions"],
+    "expected_concepts": ["amount", "fee", "net", "type", "source"],
+    "golden_answer_keywords": ["amount", "fee", "net"]
+  },
+  {
+    "query": "What does card_declined mean?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges", "/v1/payment_intents"],
+    "expected_concepts": ["card_declined", "card_error", "insufficient funds"],
+    "golden_answer_keywords": ["card_declined", "402", "card_error"]
+  },
+  {
+    "query": "Why am I getting insufficient_funds error?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["insufficient_funds", "decline", "card_error"],
+    "golden_answer_keywords": ["insufficient_funds", "decline"]
+  },
+  {
+    "query": "What does authentication_required error mean?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["authentication_required", "3D Secure", "SCA"],
+    "golden_answer_keywords": ["authentication_required", "3D Secure"]
+  },
+  {
+    "query": "How do I handle rate_limit errors from Stripe?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["rate_limit", "429", "retry", "exponential backoff"],
+    "golden_answer_keywords": ["429", "retry", "backoff"]
+  },
+  {
+    "query": "What does resource_missing mean in Stripe?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["resource_missing", "invalid_request_error", "404"],
+    "golden_answer_keywords": ["resource_missing", "does not exist"]
+  },
+  {
+    "query": "Why am I getting an api_key_expired error?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["api_key_expired", "authentication", "rotate key"],
+    "golden_answer_keywords": ["expired", "rotate", "API key"]
+  },
+  {
+    "query": "What does invalid_request_error mean?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["invalid_request_error", "parameter", "validation"],
+    "golden_answer_keywords": ["invalid_request_error", "parameter"]
+  },
+  {
+    "query": "How do I fix payment_intent_unexpected_state?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["payment_intent_unexpected_state", "status", "confirm"],
+    "golden_answer_keywords": ["status", "requires_payment_method", "requires_confirmation"]
+  },
+  {
+    "query": "What does expired_card error code mean?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/charges"],
+    "expected_concepts": ["expired_card", "card_error", "expiration"],
+    "golden_answer_keywords": ["expired_card", "expiration"]
+  },
+  {
+    "query": "Why am I getting account_invalid error?",
+    "api": "stripe",
+    "tool": "debug_error",
+    "expected_endpoints": ["/v1/accounts"],
+    "expected_concepts": ["account_invalid", "Connect", "disabled"],
+    "golden_answer_keywords": ["account_invalid", "disabled"]
+  },
+  {
+    "query": "How do I set up webhooks with Stripe?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/webhook_endpoints"],
+    "expected_concepts": ["webhook", "endpoint", "events", "signature verification"],
+    "golden_answer_keywords": ["webhook_endpoints", "url", "enabled_events"]
+  },
+  {
+    "query": "How do I verify Stripe webhook signatures?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/webhook_endpoints"],
+    "expected_concepts": ["webhook signature", "endpoint secret", "constructEvent"],
+    "golden_answer_keywords": ["constructEvent", "whsec_", "raw body"]
+  },
+  {
+    "query": "How do I handle 3D Secure authentication?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["3D Secure", "SCA", "requires_action", "next_action"],
+    "golden_answer_keywords": ["requires_action", "next_action", "redirect_to_url"]
+  },
+  {
+    "query": "How do I set up recurring billing with Stripe?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/subscriptions", "/v1/prices"],
+    "expected_concepts": ["subscription", "recurring", "price", "billing cycle"],
+    "golden_answer_keywords": ["subscription", "price", "recurring"]
+  },
+  {
+    "query": "How do I implement Stripe Connect onboarding?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/accounts", "/v1/account_links"],
+    "expected_concepts": ["Connect", "onboarding", "account_links", "Express"],
+    "golden_answer_keywords": ["account_links", "onboarding", "return_url"]
+  },
+  {
+    "query": "How do I process a direct charge on a connected account?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/charges", "/v1/payment_intents", "/v1/accounts"],
+    "expected_concepts": ["Connect", "direct charge", "Stripe-Account", "on_behalf_of"],
+    "golden_answer_keywords": ["Stripe-Account", "direct"]
+  },
+  {
+    "query": "How do I handle subscription trial periods?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/subscriptions"],
+    "expected_concepts": ["trial", "trial_end", "trial_period_days"],
+    "golden_answer_keywords": ["trial_end", "trial_period_days"]
+  },
+  {
+    "query": "How do I use Stripe Elements to collect card details?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_intents"],
+    "expected_concepts": ["Elements", "CardElement", "confirmCardPayment", "client-side"],
+    "golden_answer_keywords": ["Elements", "confirmCardPayment", "client_secret"]
+  },
+  {
+    "query": "How do I create and use Stripe coupons for discounts?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/coupons"],
+    "expected_concepts": ["coupon", "discount", "percent_off", "amount_off"],
+    "golden_answer_keywords": ["coupon", "percent_off", "duration"]
+  },
+  {
+    "query": "How do I handle payment disputes and chargebacks?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/disputes"],
+    "expected_concepts": ["dispute", "chargeback", "evidence", "respond"],
+    "golden_answer_keywords": ["dispute", "evidence", "respond"]
+  },
+  {
+    "query": "How do I implement metered billing with usage records?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/billing/meters", "/v1/subscription_items", "/v1/usage_records"],
+    "expected_concepts": ["metered", "usage_records", "subscription_item", "quantity"],
+    "golden_answer_keywords": ["usage_records", "quantity", "timestamp"]
+  },
+  {
+    "query": "How do I set up Stripe tax calculation?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/tax/calculations"],
+    "expected_concepts": ["tax", "calculation", "automatic_tax", "tax_id"],
+    "golden_answer_keywords": ["automatic_tax", "enabled"]
+  },
+  {
+    "query": "How do I manage multiple payment methods for a customer?",
+    "api": "stripe",
+    "tool": "search",
+    "expected_endpoints": ["/v1/payment_methods", "/v1/customers"],
+    "expected_concepts": ["payment method", "list", "attach", "detach", "default"],
+    "golden_answer_keywords": ["payment_methods", "attach", "customer"]
+  }
+]

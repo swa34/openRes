@@ -1,0 +1,314 @@
+[
+  {
+    "query": "How do I send an SMS message with Twilio?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["Message", "To", "From", "Body"],
+    "golden_answer_keywords": ["POST", "To", "From", "Body", "MessagingServiceSid"]
+  },
+  {
+    "query": "How do I list all messages in my account?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["Message", "list", "pagination", "DateSent"],
+    "golden_answer_keywords": ["GET", "PageSize", "DateSent", "To", "From"]
+  },
+  {
+    "query": "How do I make an outbound phone call?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["Call", "To", "From", "Url", "TwiML"],
+    "golden_answer_keywords": ["POST", "To", "From", "Url", "Twiml"]
+  },
+  {
+    "query": "How do I retrieve details of a specific call?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["Call", "CallSid", "Status", "retrieve"],
+    "golden_answer_keywords": ["GET", "CallSid", "Status", "Duration"]
+  },
+  {
+    "query": "How do I purchase a phone number?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers"],
+    "expected_concepts": ["IncomingPhoneNumber", "PhoneNumber", "purchase", "AvailablePhoneNumbers"],
+    "golden_answer_keywords": ["POST", "PhoneNumber", "AreaCode", "FriendlyName"]
+  },
+  {
+    "query": "How do I list all phone numbers on my account?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers"],
+    "expected_concepts": ["IncomingPhoneNumber", "list", "PhoneNumber", "capabilities"],
+    "golden_answer_keywords": ["GET", "PhoneNumber", "FriendlyName", "SmsUrl", "VoiceUrl"]
+  },
+  {
+    "query": "How do I update the webhook URL on a phone number?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers"],
+    "expected_concepts": ["IncomingPhoneNumber", "webhook", "SmsUrl", "VoiceUrl", "update"],
+    "golden_answer_keywords": ["POST", "SmsUrl", "VoiceUrl", "StatusCallback"]
+  },
+  {
+    "query": "How do I list call recordings?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Recordings"],
+    "expected_concepts": ["Recording", "list", "CallSid", "media"],
+    "golden_answer_keywords": ["GET", "RecordingSid", "CallSid", "Duration"]
+  },
+  {
+    "query": "How do I delete a recording?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Recordings"],
+    "expected_concepts": ["Recording", "delete", "RecordingSid"],
+    "golden_answer_keywords": ["DELETE", "RecordingSid", "204"]
+  },
+  {
+    "query": "How do I create a conference call?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Conferences"],
+    "expected_concepts": ["Conference", "Dial", "TwiML", "participants"],
+    "golden_answer_keywords": ["Conference", "FriendlyName", "Dial", "Participant"]
+  },
+  {
+    "query": "How do I add a participant to an existing conference?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Conferences"],
+    "expected_concepts": ["Conference", "Participant", "From", "To", "add"],
+    "golden_answer_keywords": ["POST", "Participants", "From", "To", "ConferenceSid"]
+  },
+  {
+    "query": "How do I create a call queue?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Queues"],
+    "expected_concepts": ["Queue", "FriendlyName", "MaxSize", "create"],
+    "golden_answer_keywords": ["POST", "FriendlyName", "MaxSize"]
+  },
+  {
+    "query": "How do I dequeue a caller from a queue?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Queues"],
+    "expected_concepts": ["Queue", "dequeue", "TwiML", "Members"],
+    "golden_answer_keywords": ["Dequeue", "Queue", "Members"]
+  },
+  {
+    "query": "How do I create a TwiML application?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Applications"],
+    "expected_concepts": ["Application", "VoiceUrl", "SmsUrl", "FriendlyName"],
+    "golden_answer_keywords": ["POST", "FriendlyName", "VoiceUrl", "SmsUrl"]
+  },
+  {
+    "query": "How do I set up a SIP domain?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/SIP"],
+    "expected_concepts": ["SIP", "Domain", "DomainName", "VoiceUrl"],
+    "golden_answer_keywords": ["POST", "DomainName", "VoiceUrl", "SIP"]
+  },
+  {
+    "query": "How does Twilio Verify work for phone verification?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v2/Services"],
+    "expected_concepts": ["Verify", "Service", "Verification", "OTP", "channel"],
+    "golden_answer_keywords": ["Verification", "Service", "sms", "call", "email", "channel"]
+  },
+  {
+    "query": "How do I send a verification code with Twilio Verify?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v2/Services"],
+    "expected_concepts": ["Verify", "Verification", "To", "Channel", "send"],
+    "golden_answer_keywords": ["POST", "Verifications", "To", "Channel"]
+  },
+  {
+    "query": "How do I check a verification code?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v2/Services"],
+    "expected_concepts": ["Verify", "VerificationCheck", "Code", "To", "approved"],
+    "golden_answer_keywords": ["POST", "VerificationCheck", "Code", "To", "approved"]
+  },
+  {
+    "query": "How do I create a Conversation?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v1/Conversations"],
+    "expected_concepts": ["Conversation", "FriendlyName", "create", "messaging"],
+    "golden_answer_keywords": ["POST", "FriendlyName", "UniqueName", "ConversationSid"]
+  },
+  {
+    "query": "How do I add a participant to a Conversation?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v1/Conversations"],
+    "expected_concepts": ["Conversation", "Participant", "Identity", "MessagingBinding"],
+    "golden_answer_keywords": ["POST", "Participants", "Identity", "MessagingBinding.Address"]
+  },
+  {
+    "query": "How do I create a Sync Service and document?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v1/Services"],
+    "expected_concepts": ["Sync", "Service", "Document", "real-time", "data"],
+    "golden_answer_keywords": ["POST", "Service", "Documents", "Data", "UniqueName"]
+  },
+  {
+    "query": "How do I create a Studio Flow?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v2/Flows"],
+    "expected_concepts": ["Studio", "Flow", "Definition", "CommitMessage", "Status"],
+    "golden_answer_keywords": ["POST", "FriendlyName", "Definition", "Status", "published"]
+  },
+  {
+    "query": "How do I trigger a Studio Flow execution?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/v2/Flows"],
+    "expected_concepts": ["Studio", "Execution", "trigger", "To", "From"],
+    "golden_answer_keywords": ["POST", "Executions", "To", "From", "Parameters"]
+  },
+  {
+    "query": "What is TwiML and how does it work?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls", "/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["TwiML", "XML", "Say", "Play", "Gather", "Dial", "Message"],
+    "golden_answer_keywords": ["TwiML", "XML", "Response", "Say", "Gather", "Dial"]
+  },
+  {
+    "query": "What parameters does the send message endpoint accept?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["To", "From", "Body", "MediaUrl", "MessagingServiceSid", "StatusCallback"],
+    "golden_answer_keywords": ["To", "From", "Body", "MediaUrl", "MessagingServiceSid", "StatusCallback"]
+  },
+  {
+    "query": "How do I set up a webhook to handle incoming SMS?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers", "/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["webhook", "SmsUrl", "incoming", "TwiML", "POST"],
+    "golden_answer_keywords": ["SmsUrl", "webhook", "TwiML", "POST", "From", "Body"]
+  },
+  {
+    "query": "How do I handle incoming voice calls with TwiML?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls", "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers"],
+    "expected_concepts": ["incoming", "VoiceUrl", "TwiML", "Say", "Gather", "Dial"],
+    "golden_answer_keywords": ["VoiceUrl", "TwiML", "Say", "Gather", "Dial"]
+  },
+  {
+    "query": "How do I send an MMS with media attachments?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["MMS", "MediaUrl", "Message", "media", "image"],
+    "golden_answer_keywords": ["POST", "MediaUrl", "To", "From"]
+  },
+  {
+    "query": "How do I modify a live call?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["Call", "update", "Url", "Status", "modify", "redirect"],
+    "golden_answer_keywords": ["POST", "Url", "Status", "completed", "canceled"]
+  },
+  {
+    "query": "How do I use Twilio's request validation to secure webhooks?",
+    "api": "twilio",
+    "tool": "search",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages", "/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["request validation", "X-Twilio-Signature", "AuthToken", "security"],
+    "golden_answer_keywords": ["X-Twilio-Signature", "AuthToken", "validate", "HMAC"]
+  },
+  {
+    "query": "What does error 21211 mean?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages", "/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["21211", "invalid To phone number", "E.164", "format"],
+    "golden_answer_keywords": ["21211", "invalid", "To", "phone number", "E.164"]
+  },
+  {
+    "query": "Why am I getting error 20003?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages", "/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["20003", "authentication", "AccountSid", "AuthToken", "credentials"],
+    "golden_answer_keywords": ["20003", "authentication", "AccountSid", "AuthToken"]
+  },
+  {
+    "query": "What does error 21608 mean when sending SMS?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["21608", "unverified", "trial", "To number", "not verified"],
+    "golden_answer_keywords": ["21608", "unverified", "trial", "Verified Caller IDs"]
+  },
+  {
+    "query": "Why am I getting error 30007 on message delivery?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["30007", "carrier", "filtered", "message filtering", "delivery failure"],
+    "golden_answer_keywords": ["30007", "carrier", "filtered", "content"]
+  },
+  {
+    "query": "What does error 11200 mean?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls", "/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["11200", "HTTP retrieval failure", "TwiML", "webhook URL", "unreachable"],
+    "golden_answer_keywords": ["11200", "HTTP retrieval failure", "TwiML", "URL", "timeout"]
+  },
+  {
+    "query": "Why am I getting error 21614 when sending SMS?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages"],
+    "expected_concepts": ["21614", "not SMS-capable", "From number", "capabilities"],
+    "golden_answer_keywords": ["21614", "not SMS-capable", "From", "capabilities"]
+  },
+  {
+    "query": "What does error 13224 mean during a call?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["13224", "invalid TwiML", "Dial", "number", "malformed"],
+    "golden_answer_keywords": ["13224", "invalid", "Dial", "TwiML"]
+  },
+  {
+    "query": "Why am I getting error 20404?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages", "/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["20404", "not found", "resource", "SID"],
+    "golden_answer_keywords": ["20404", "not found", "resource", "SID", "URL"]
+  },
+  {
+    "query": "How do I handle error 20429 rate limiting?",
+    "api": "twilio",
+    "tool": "debug_error",
+    "expected_endpoints": ["/2010-04-01/Accounts/{AccountSid}/Messages", "/2010-04-01/Accounts/{AccountSid}/Calls"],
+    "expected_concepts": ["20429", "rate limit", "too many requests", "retry", "backoff"],
+    "golden_answer_keywords": ["20429", "rate limit", "retry", "backoff", "concurrency"]
+  }
+]
