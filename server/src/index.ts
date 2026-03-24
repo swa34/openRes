@@ -59,6 +59,29 @@ const WIDGET_HTML = `
 </html>
 `.trim();
 
+// ─── Privacy policy (read once at startup) ───
+
+let PRIVACY_HTML = "";
+try {
+  const privacyMd = readFileSync(resolve(import.meta.dirname, "../../PRIVACY.md"), "utf8");
+  PRIVACY_HTML = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DocScope Privacy Policy</title><style>body{font-family:system-ui,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#1a1a1a}h1,h2,h3{margin-top:2rem}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background:#f5f5f5}a{color:#0066cc}hr{border:none;border-top:1px solid #eee;margin:2rem 0}</style></head><body>${privacyMd
+    .replace(/^# (.+)$/m, "<h1>$1</h1>")
+    .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+    .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+    .replace(/^- (.+)$/gm, "<li>$1</li>")
+    .replace(/^---$/gm, "<hr>")
+    .replace(/\n{2,}/g, "</p><p>")
+    .replace(/\|(.+)\|/gm, (match) => {
+      const cells = match.split("|").filter(Boolean).map((c) => c.trim());
+      return "<tr>" + cells.map((c) => `<td>${c}</td>`).join("") + "</tr>";
+    })
+  }</body></html>`;
+} catch {
+  console.warn("PRIVACY.md not found — /privacy route will return 404");
+}
+
 // ─── Rate limiter (in-memory, per-IP, sliding window) ───
 
 const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
@@ -245,24 +268,13 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
     return;
   }
 
-  // Privacy policy (served as HTML from PRIVACY.md)
+  // Privacy policy
   if (req.method === "GET" && url.pathname === "/privacy") {
-    const privacyMd = readFileSync(resolve(import.meta.dirname, "../../PRIVACY.md"), "utf8");
-    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DocScope Privacy Policy</title><style>body{font-family:system-ui,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#1a1a1a}h1,h2,h3{margin-top:2rem}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background:#f5f5f5}a{color:#0066cc}hr{border:none;border-top:1px solid #eee;margin:2rem 0}</style></head><body>${privacyMd
-      .replace(/^# (.+)$/m, "<h1>$1</h1>")
-      .replace(/^## (.+)$/gm, "<h2>$1</h2>")
-      .replace(/^### (.+)$/gm, "<h3>$1</h3>")
-      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
-      .replace(/^- (.+)$/gm, "<li>$1</li>")
-      .replace(/^---$/gm, "<hr>")
-      .replace(/\n{2,}/g, "</p><p>")
-      .replace(/\|(.+)\|/gm, (match) => {
-        const cells = match.split("|").filter(Boolean).map((c) => c.trim());
-        return "<tr>" + cells.map((c) => `<td>${c}</td>`).join("") + "</tr>";
-      })
-    }</body></html>`;
-    res.writeHead(200, { "content-type": "text/html; charset=utf-8" }).end(html);
+    if (PRIVACY_HTML) {
+      res.writeHead(200, { "content-type": "text/html; charset=utf-8" }).end(PRIVACY_HTML);
+    } else {
+      res.writeHead(404).end("Privacy policy not found");
+    }
     return;
   }
 

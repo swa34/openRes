@@ -18,6 +18,9 @@ COPY server/ ./server/
 # Copy docs
 COPY docs-seed/ ./docs-seed/
 
+# Copy privacy policy
+COPY PRIVACY.md ./PRIVACY.md
+
 WORKDIR /app/server
 
 EXPOSE ${PORT:-3000}
