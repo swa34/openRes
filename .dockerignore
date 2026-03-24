@@ -8,3 +8,4 @@ server/eval-reports
 .claude
 *.md
 !README.md
+!PRIVACY.md
