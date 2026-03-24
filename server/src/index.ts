@@ -40,6 +40,7 @@ import type { ParsedEndpoint, ErrorInfo } from "./types.js";
 const PORT = Number(process.env.PORT ?? 3000);
 const MCP_PATH = "/mcp";
 const WIDGET_URI = "ui://docscope/widget.html";
+const WIDGET_DOMAIN = process.env.WIDGET_DOMAIN ?? "https://openres-production.up.railway.app";
 
 // ─── Inline built widget ───
 
@@ -118,11 +119,12 @@ function createDocScopeServer(): McpServer {
           _meta: {
             ui: {
               prefersBorder: true,
-              domain: "https://docscope.dev",
+              domain: WIDGET_DOMAIN,
               csp: {
                 connectDomains: [
                   "https://api.stripe.com",
                   "https://api.twilio.com",
+                  WIDGET_DOMAIN,
                 ],
               },
             },
@@ -243,6 +245,27 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
     return;
   }
 
+  // Privacy policy (served as HTML from PRIVACY.md)
+  if (req.method === "GET" && url.pathname === "/privacy") {
+    const privacyMd = readFileSync(resolve(import.meta.dirname, "../../PRIVACY.md"), "utf8");
+    const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DocScope Privacy Policy</title><style>body{font-family:system-ui,sans-serif;max-width:720px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#1a1a1a}h1,h2,h3{margin-top:2rem}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ddd;padding:8px;text-align:left}th{background:#f5f5f5}a{color:#0066cc}hr{border:none;border-top:1px solid #eee;margin:2rem 0}</style></head><body>${privacyMd
+      .replace(/^# (.+)$/m, "<h1>$1</h1>")
+      .replace(/^## (.+)$/gm, "<h2>$1</h2>")
+      .replace(/^### (.+)$/gm, "<h3>$1</h3>")
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+      .replace(/^- (.+)$/gm, "<li>$1</li>")
+      .replace(/^---$/gm, "<hr>")
+      .replace(/\n{2,}/g, "</p><p>")
+      .replace(/\|(.+)\|/gm, (match) => {
+        const cells = match.split("|").filter(Boolean).map((c) => c.trim());
+        return "<tr>" + cells.map((c) => `<td>${c}</td>`).join("") + "</tr>";
+      })
+    }</body></html>`;
+    res.writeHead(200, { "content-type": "text/html; charset=utf-8" }).end(html);
+    return;
+  }
+
   // Rate limiting (applied to /mcp only)
   const clientIp = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim()
     ?? req.socket.remoteAddress
@@ -280,7 +303,7 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
       const durationMs = Date.now() - startMs;
       log.error({ traceId, error, durationMs }, "Error handling MCP request");
       if (!res.headersSent) {
-        res.writeHead(500).end(JSON.stringify({ error: "Internal server error", traceId }));
+        res.writeHead(500).end(JSON.stringify({ error: "Internal server error" }));
       }
     }
     return;

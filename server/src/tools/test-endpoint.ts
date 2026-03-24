@@ -104,7 +104,6 @@ export async function handler(args: {
           error: true,
           code: err.code,
           message: err.message,
-          requestId: err.requestId,
         },
         _meta: {
           error: true,
