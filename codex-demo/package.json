@@ -1,0 +1,13 @@
+{
+  "name": "codex-demo",
+  "version": "1.0.0",
+  "description": "Automated PR code review using GPT-5 via Responses API",
+  "type": "module",
+  "main": "review.mjs",
+  "scripts": {
+    "review": "node review.mjs"
+  },
+  "dependencies": {
+    "openai": "^6.32.0"
+  }
+}

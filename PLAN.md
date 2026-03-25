@@ -584,11 +584,13 @@ Day 10:
   Orchestrator → publish on GitHub + dev.to
 ```
 
-### Phase 4: Projects 2 & 3 (Days 11–20)
+### Phase 4: Projects 2 & 3 (Days 11–20) — COMPLETE
 
-- **Days 11–14:** "MCP Server Patterns for ChatGPT Apps" technical guide
-- **Days 15–18:** Codex workflow demo (automated code review / PR summarizer)
-- **Days 19–20:** Resume updates, interview prep
+| Task | Status |
+|------|--------|
+| "MCP Server Patterns for ChatGPT Apps" technical guide | DONE — `docs/mcp-server-patterns.md` (~2800 words, 6 sections) |
+| Codex workflow demo (automated PR code review) | DONE — `codex-demo/` (review.mjs + prompts.mjs + example-diff.patch) |
+| Resume updates | DONE — `Scott_Allen_OpenAI_Resume_v2.md` (new file, .docx untouched) |
 
 ---
 

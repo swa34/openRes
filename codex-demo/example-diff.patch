@@ -1,0 +1,51 @@
+diff --git a/server/src/middleware/rateLimiter.ts b/server/src/middleware/rateLimiter.ts
+new file mode 100644
+index 0000000..a3d8f1c
+--- /dev/null
++++ b/server/src/middleware/rateLimiter.ts
+@@ -0,0 +1,42 @@
++import { Request, Response, NextFunction } from "express";
++
++interface RateLimitEntry {
++  count: number;
++  resetTime: number;
++}
++
++const store: Record<string, RateLimitEntry> = {};
++
++const WINDOW_MS = 60_000;
++const MAX_REQUESTS = 100;
++
++export function rateLimiter(req: Request, res: Response, next: NextFunction) {
++  const key = req.ip;
++  const now = Date.now();
++
++  if (!store[key]) {
++    store[key] = { count: 1, resetTime: now + WINDOW_MS };
++    return next();
++  }
++
++  const entry = store[key];
++
++  if (now > entry.resetTime) {
++    entry.count = 1;
++    entry.resetTime = now + WINDOW_MS;
++    return next();
++  }
++
++  entry.count++;
++
++  if (entry.count > MAX_REQUESTS) {
++    res.status(429).json({ error: "Too many requests" });
++    return;
++  }
++
++  next();
++}
++
++// Clean up stale entries every 5 minutes
++setInterval(() => {
++  for (const key in store) {
++    if (Date.now() > store[key].resetTime) delete store[key];
++  }
++}, 300000);
