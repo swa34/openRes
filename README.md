@@ -81,7 +81,7 @@ Precision@5 tops out around 0.66 because Stripe has a lot of semantically simila
    ```
    https://openres-production.up.railway.app/mcp
    ```
-4. Ask something like *"How do I send an SMS with Twilio?"* or *"What params does POST /v1/charges accept?"*
+4. Ask something like *"Use DocScope to find how to send an SMS with Twilio"* or *"Use DocScope to look up what params POST /v1/charges accepts"*
 
 The widget should pop up with structured endpoint cards. You can click through to see parameters, schemas, and use the "Try it" button to make real API calls (you'll need your own Stripe or Twilio key for that part).
 
