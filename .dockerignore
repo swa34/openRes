@@ -9,3 +9,4 @@ server/eval-reports
 *.md
 !README.md
 !PRIVACY.md
+!TERMS.md

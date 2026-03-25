@@ -60,19 +60,30 @@
 
 **Why latency increased:** Phase 1 eval ran without LLM answer synthesis. Phase 2 includes per-query answer synthesis via gpt-5-mini for faithfulness/relevance scoring. Production search latency (without synthesis) is ~500-800ms.
 
-### Phase 1 gates
-- [x] Test widget in ChatGPT (ngrok + Developer Mode)
-- [x] Run eval harness — all blocking quality gates pass
+### Phase 3: Ship — IN PROGRESS
+
+| Task | Status |
+|------|--------|
+| GitHub repo (public) | DONE — https://github.com/swa34/openRes |
+| Deploy to Railway (HTTPS) | DONE — https://openres-production.up.railway.app/mcp |
+| End-to-end test in ChatGPT with deployed server | DONE — search + widget works via Railway URL |
+| README with architecture diagram + eval results | DONE |
+| 2-min demo screencast | TODO |
+| App Directory submission prep | TODO |
+
+### Remaining Phase 1 gates
 - [ ] Test test_endpoint with real Stripe test key
 - [ ] Fix error catalog (empty — Stripe spec doesn't expose error codes in parseable format)
 
-### To resume
-```bash
-cd /home/scottallen/VSCODE/openRes
-sudo systemctl start docker
-docker compose up -d
+### Environments
+```
+# Production (Railway)
+https://openres-production.up.railway.app/mcp
+
+# Local dev
+cd /home/scottallen/VSCODE/openRes/server
+npm run dev
 # Server at http://localhost:3000/mcp
-# Test: curl -s http://localhost:3000/ → "DocScope MCP server"
 ```
 
 ---
