@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { HERO, SITE } from "@/lib/content";
+import { Link } from "react-router";
+import { HERO } from "@/lib/content";
 import TerminalDemo from "./terminal-demo";
 
 export default function Hero() {
@@ -34,14 +35,12 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <a
-              href={SITE.mcpUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={HERO.cta.href}
               className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
             >
               {HERO.cta.label}
-            </a>
+            </Link>
             <a
               href={HERO.secondaryCta.href}
               target="_blank"

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router";
+import { SITE } from "@/lib/content";
 
 const QUICK_LINKS = [
   { to: "/", label: "Home" },
@@ -60,7 +61,7 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="https://github.com/swa34/docscope"
+                  href={SITE.repo}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-primary transition-colors"

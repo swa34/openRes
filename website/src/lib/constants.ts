@@ -42,9 +42,14 @@ export const FEATURES = [
 
 export const TOOLS = [
   {
-    name: "search_docs",
+    name: "search",
     description:
       "RAG-powered semantic search across ingested API documentation with hybrid retrieval and LLM reranking.",
+  },
+  {
+    name: "fetch",
+    description:
+      "Retrieve the full text of any indexed document by its vector ID from Pinecone.",
   },
   {
     name: "get_endpoint",
@@ -52,18 +57,13 @@ export const TOOLS = [
       "Retrieve full OpenAPI endpoint details including parameters, request/response schemas, and code examples.",
   },
   {
-    name: "debug_error",
-    description:
-      "Resolve API error codes with root cause analysis, fix suggestions, and links to relevant documentation.",
-  },
-  {
-    name: "test_request",
+    name: "test_endpoint",
     description:
       "Execute a live API request against a documentation endpoint and return the formatted response.",
   },
   {
-    name: "list_sources",
+    name: "debug_error",
     description:
-      "List all ingested API documentation sources with metadata, chunk counts, and last-updated timestamps.",
+      "Resolve API error codes with root cause analysis, fix suggestions, and links to relevant documentation.",
   },
 ] as const;

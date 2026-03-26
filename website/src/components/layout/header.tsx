@@ -101,7 +101,7 @@ export default function Header() {
         {/* Desktop actions */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://github.com/swa34/docscope"
+            href={SITE.repo}
             target="_blank"
             rel="noopener noreferrer"
             className="text-text-muted hover:text-text transition-colors"
@@ -159,7 +159,7 @@ export default function Header() {
               ))}
               <div className="mt-3 pt-3 border-t border-border flex items-center gap-3">
                 <a
-                  href="https://github.com/swa34/docscope"
+                  href={SITE.repo}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-text-muted hover:text-text transition-colors"
@@ -167,14 +167,13 @@ export default function Header() {
                 >
                   <GitHubIcon />
                 </a>
-                <a
-                  href="https://openres-production.up.railway.app/mcp"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to={SITE.chatgptSetupUrl}
+                  onClick={() => setMobileOpen(false)}
                   className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
                 >
                   Try in ChatGPT
-                </a>
+                </Link>
               </div>
             </div>
           </motion.nav>

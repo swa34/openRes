@@ -68,8 +68,9 @@ export default function SearchDemo() {
       if (endpoint) {
         setSelectedEndpoint(endpoint);
       }
-    } catch {
-      // Silently fail — user can still see search results
+    } catch (err) {
+      console.error("Failed to fetch endpoint details:", err);
+      // User can still see search results
     } finally {
       setEndpointLoading(false);
     }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useMemo } from "react";
 import hljs from "highlight.js/lib/core";
 import json from "highlight.js/lib/languages/json";
 import bash from "highlight.js/lib/languages/bash";
@@ -25,21 +25,21 @@ export default function CodeBlock({
   label,
   showLineNumbers = false,
 }: CodeBlockProps) {
-  const codeRef = useRef<HTMLElement>(null);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    if (codeRef.current) {
-      codeRef.current.textContent = code;
-      // Clear previous highlight state so hljs will re-highlight
-      delete codeRef.current.dataset.highlighted;
-      try {
-        hljs.highlightElement(codeRef.current);
-      } catch {
-        // Language not registered
-      }
+  const highlightedHtml = useMemo(() => {
+    try {
+      return hljs.highlight(code, { language }).value;
+    } catch {
+      // Language not registered — return escaped HTML
+      return code
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
     }
   }, [code, language]);
+
+  const lines = highlightedHtml.split("\n");
 
   const handleCopy = async () => {
     try {
@@ -50,8 +50,6 @@ export default function CodeBlock({
       // Clipboard unavailable
     }
   };
-
-  const lines = code.split("\n");
 
   return (
     <div className="rounded-xl overflow-hidden border border-border">
@@ -82,11 +80,9 @@ export default function CodeBlock({
                   <td className="px-3 py-0">
                     <pre className="m-0 font-mono text-sm leading-6">
                       <code
-                        ref={i === 0 ? codeRef : undefined}
-                        className={i === 0 ? `language-${language}` : ""}
-                      >
-                        {line}
-                      </code>
+                        className={`language-${language}`}
+                        dangerouslySetInnerHTML={{ __html: line }}
+                      />
                     </pre>
                   </td>
                 </tr>
@@ -95,9 +91,10 @@ export default function CodeBlock({
           </table>
         ) : (
           <pre className="m-0 p-4 font-mono text-sm leading-6">
-            <code ref={codeRef} className={`language-${language}`}>
-              {code}
-            </code>
+            <code
+              className={`language-${language}`}
+              dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+            />
           </pre>
         )}
       </div>

@@ -8,7 +8,7 @@
 
 import "dotenv/config";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { readFileSync, existsSync, statSync } from "node:fs";
+import { readFileSync, existsSync, statSync, createReadStream } from "node:fs";
 import { resolve, extname } from "node:path";
 import { randomUUID } from "node:crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -376,15 +376,15 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
     };
 
     // Try to serve the exact file
-    const safePath = url.pathname.replace(/\.\./g, "");
+    const safePath = url.pathname;
     const filePath = resolve(WEBSITE_DIR, safePath === "/" ? "index.html" : safePath.slice(1));
 
     if (filePath.startsWith(WEBSITE_DIR) && existsSync(filePath) && statSync(filePath).isFile()) {
       const ext = extname(filePath);
       const contentType = MIME_TYPES[ext] ?? "application/octet-stream";
-      const body = readFileSync(filePath);
+      const stream = createReadStream(filePath);
       res.writeHead(200, { "Content-Type": contentType, "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=31536000, immutable" });
-      res.end(body);
+      stream.pipe(res);
       return;
     }
 
