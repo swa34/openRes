@@ -15,7 +15,7 @@ export function Component() {
       >
         <div className="max-w-2xl mx-auto space-y-8">
           {/* ChatGPT setup */}
-          <div>
+          <div id="setup">
             <h3 className="text-lg font-semibold text-text mb-3">Use in ChatGPT</h3>
             <ol className="space-y-3 text-sm text-text-secondary">
               <li className="flex gap-3">

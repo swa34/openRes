@@ -16,6 +16,7 @@ export const SITE = {
   author: "Scott Allen",
   repo: "https://github.com/swa34/openRes",
   mcpUrl: "https://openres-production.up.railway.app/mcp",
+  chatgptSetupUrl: "/docs#setup",
 } as const;
 
 // ─── Navigation ───

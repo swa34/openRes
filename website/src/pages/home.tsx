@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Hero from "@/components/hero/hero";
 import FeatureGrid from "@/components/features/feature-grid";
 import ArchitectureDiagram from "@/components/architecture/architecture-diagram";
@@ -41,14 +42,12 @@ export function Component() {
             Connect DocScope to ChatGPT and search API documentation in seconds.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href={SITE.mcpUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to={SITE.chatgptSetupUrl}
               className="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
             >
               Try in ChatGPT
-            </a>
+            </Link>
             <a
               href={SITE.repo}
               target="_blank"

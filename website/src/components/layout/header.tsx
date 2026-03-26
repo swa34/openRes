@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, Link } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import { SITE } from "@/lib/content";
 
 const NAV_LINKS = [
   { to: "/", label: "Home" },
@@ -108,14 +109,12 @@ export default function Header() {
           >
             <GitHubIcon />
           </a>
-          <a
-            href="https://openres-production.up.railway.app/mcp"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={SITE.chatgptSetupUrl}
             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg hover:opacity-90 transition-opacity"
           >
             Try in ChatGPT
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
