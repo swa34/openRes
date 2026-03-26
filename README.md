@@ -4,7 +4,7 @@ A ChatGPT App that lets developers search API docs, explore endpoints, and test 
 
 Right now it indexes **Stripe** (587 endpoints) and **Twilio** (197 endpoints), but the ingestion pipeline is designed to handle any OpenAPI spec.
 
-**Live:** https://openres-production.up.railway.app/mcp
+**Live:** https://openres-production.up.railway.app
 
 ## Why I built this
 
