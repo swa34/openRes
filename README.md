@@ -131,8 +131,25 @@ openRes/
     App.tsx               # Main widget, routes tool results to views
     bridge.ts             # MCP Apps UI bridge (JSON-RPC/postMessage)
     components/           # EndpointCard, RequestBuilder, ResponseViewer, etc.
+  website/                # Marketing/docs site (React 19 + Vite 8 + Tailwind v4)
+    src/pages/            # Home, Features, Architecture, Demo, Docs
+    src/lib/mcp-client.ts # Live demo MCP client
   docs-seed/              # OpenAPI specs (Stripe, Twilio)
 ```
+
+## Website
+
+A standalone marketing and documentation site for DocScope, built with React 19, Vite 8, Tailwind CSS v4, and shadcn/ui. Includes a live demo page that calls the production MCP server.
+
+```bash
+cd website && npm install
+npm run dev      # Dev server at http://localhost:5174
+npm run build    # Production build to website/dist/
+npm run preview  # Preview production build
+npm test         # Run tests
+```
+
+Deployed as a static SPA (Netlify, Vercel, or Cloudflare Pages). See `website/.env.example` for configuration.
 
 ## Security
 
