@@ -4,7 +4,7 @@ A ChatGPT App that lets developers search API docs, explore endpoints, and test 
 
 Right now it indexes **Stripe** (587 endpoints) and **Twilio** (197 endpoints), but the ingestion pipeline is designed to handle any OpenAPI spec.
 
-**Live:** https://openres-production.up.railway.app/mcp
+**Website:** https://openres-production.up.railway.app | **MCP Endpoint:** https://openres-production.up.railway.app/mcp
 
 ## Why I built this
 
@@ -149,7 +149,7 @@ npm run preview  # Preview production build
 npm test         # Run tests
 ```
 
-Deployed as a static SPA (Netlify, Vercel, or Cloudflare Pages). See `website/.env.example` for configuration.
+Live at [openres-production.up.railway.app](https://openres-production.up.railway.app). Served from the same Railway deployment as the MCP server.
 
 ## Security
 
@@ -161,6 +161,13 @@ The `test_endpoint` tool executes real HTTP requests, so security matters:
 - **Keys used once and discarded** — no storage, no persistence
 
 62 security tests cover key leakage, SSRF bypass attempts, and header redaction.
+
+## Links
+
+- **Website:** [openres-production.up.railway.app](https://openres-production.up.railway.app)
+- **MCP Endpoint:** [openres-production.up.railway.app/mcp](https://openres-production.up.railway.app/mcp)
+- **GitHub:** [github.com/swa34/openRes](https://github.com/swa34/openRes)
+- **Technical Guide:** [MCP Server Patterns for ChatGPT Apps](docs/mcp-server-patterns.md)
 
 ## What's next
 

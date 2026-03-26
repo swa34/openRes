@@ -6,7 +6,7 @@
 
 I built [DocScope](https://github.com/swa34/openRes) to solve a specific problem: developers spend too much time bouncing between API docs and their editor. DocScope is a ChatGPT App that lets you search API documentation, explore endpoint schemas, and test live API calls — all without leaving the chat.
 
-It's built with the MCP protocol and OpenAI's Apps SDK. Right now it indexes Stripe (587 endpoints) and Twilio (197 endpoints), runs a hybrid RAG pipeline backed by Pinecone, and renders interactive endpoint cards in a ChatGPT iframe widget. It's live at [openres-production.up.railway.app/mcp](https://openres-production.up.railway.app/mcp).
+It's built with the MCP protocol and OpenAI's Apps SDK. Right now it indexes Stripe (587 endpoints) and Twilio (197 endpoints), runs a hybrid RAG pipeline backed by Pinecone, and renders interactive endpoint cards in a ChatGPT iframe widget. Check out the [website](https://openres-production.up.railway.app) for a live demo, or add the [MCP endpoint](https://openres-production.up.railway.app/mcp) directly in ChatGPT.
 
 This guide covers the patterns I landed on after iterating through the build — the stuff that actually matters when you're shipping an MCP server into ChatGPT.
 
@@ -487,4 +487,4 @@ These patterns came from actually shipping a ChatGPT App and iterating on what w
 4. **Build an eval pipeline from day one.** Without numbers, you're guessing.
 5. **The widget iframe has real constraints.** No localStorage, inline everything, handle both delivery mechanisms.
 
-The full source is at [github.com/swa34/openRes](https://github.com/swa34/openRes). The live server is at [openres-production.up.railway.app/mcp](https://openres-production.up.railway.app/mcp) — you can add it to ChatGPT Developer Mode and try it yourself.
+The full source is at [github.com/swa34/openRes](https://github.com/swa34/openRes). Visit the [website](https://openres-production.up.railway.app) for an interactive demo, or add the [MCP endpoint](https://openres-production.up.railway.app/mcp) to ChatGPT Developer Mode and try it yourself.
