@@ -139,7 +139,7 @@ async function rpcCall<T>(
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        Accept: "text/event-stream, application/json",
       },
       body: JSON.stringify(body),
       signal: controller.signal,

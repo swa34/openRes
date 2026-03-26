@@ -2,12 +2,14 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./app";
+import Loading from "./components/loading";
 import "./styles/index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    HydrateFallback: Loading,
     children: [
       { index: true, lazy: () => import("./pages/home") },
       { path: "features", lazy: () => import("./pages/features") },

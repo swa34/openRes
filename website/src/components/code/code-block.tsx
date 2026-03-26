@@ -31,6 +31,8 @@ export default function CodeBlock({
   useEffect(() => {
     if (codeRef.current) {
       codeRef.current.textContent = code;
+      // Clear previous highlight state so hljs will re-highlight
+      delete codeRef.current.dataset.highlighted;
       try {
         hljs.highlightElement(codeRef.current);
       } catch {
