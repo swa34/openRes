@@ -12,6 +12,12 @@ RUN cd widget && npm ci
 COPY widget/ ./widget/
 RUN cd widget && npm run build
 
+# Install website deps + build
+COPY website/package.json website/package-lock.json ./website/
+RUN cd website && npm ci
+COPY website/ ./website/
+RUN cd website && npm run build
+
 # Copy server source
 COPY server/ ./server/
 

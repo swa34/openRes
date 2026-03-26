@@ -8,8 +8,8 @@
 
 import "dotenv/config";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync, existsSync, statSync } from "node:fs";
+import { resolve, extname } from "node:path";
 import { randomUUID } from "node:crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
@@ -291,8 +291,8 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
     return;
   }
 
-  // Health check
-  if (req.method === "GET" && url.pathname === "/") {
+  // Health check (API-only, browser requests fall through to static serving)
+  if (req.method === "GET" && url.pathname === "/health") {
     res.writeHead(200, { "content-type": "text/plain" }).end("DocScope MCP server");
     return;
   }
@@ -358,6 +358,44 @@ const httpServer = createServer(async (req: IncomingMessage, res: ServerResponse
       }
     }
     return;
+  }
+
+  // ─── Static website serving (website/dist/) ───
+  if (req.method === "GET") {
+    const WEBSITE_DIR = resolve(import.meta.dirname, "../../website/dist");
+    const MIME_TYPES: Record<string, string> = {
+      ".html": "text/html; charset=utf-8",
+      ".js": "application/javascript; charset=utf-8",
+      ".css": "text/css; charset=utf-8",
+      ".json": "application/json",
+      ".svg": "image/svg+xml",
+      ".png": "image/png",
+      ".ico": "image/x-icon",
+      ".woff2": "font/woff2",
+      ".woff": "font/woff",
+    };
+
+    // Try to serve the exact file
+    const safePath = url.pathname.replace(/\.\./g, "");
+    const filePath = resolve(WEBSITE_DIR, safePath === "/" ? "index.html" : safePath.slice(1));
+
+    if (filePath.startsWith(WEBSITE_DIR) && existsSync(filePath) && statSync(filePath).isFile()) {
+      const ext = extname(filePath);
+      const contentType = MIME_TYPES[ext] ?? "application/octet-stream";
+      const body = readFileSync(filePath);
+      res.writeHead(200, { "Content-Type": contentType, "Cache-Control": ext === ".html" ? "no-cache" : "public, max-age=31536000, immutable" });
+      res.end(body);
+      return;
+    }
+
+    // SPA fallback: serve index.html for any unmatched route
+    const indexPath = resolve(WEBSITE_DIR, "index.html");
+    if (existsSync(indexPath)) {
+      const body = readFileSync(indexPath);
+      res.writeHead(200, { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-cache" });
+      res.end(body);
+      return;
+    }
   }
 
   // 404 for everything else
